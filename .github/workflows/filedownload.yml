@@ -19,7 +19,7 @@ jobs:
         with:
           url: "https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf"
           target: path/to/artifact
-          
+           
   download-file:
     name: Download File
     runs-on: ubuntu-latest
