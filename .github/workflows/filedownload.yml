@@ -41,9 +41,10 @@ jobs:
     steps:
       - shell: bash
         run: |
+          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency.pdf
           expr 3 + 7 > math-homework.txt
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v3
         with:
           name: homework
-          path: math-homework.txt
+          path: currency.pdf
