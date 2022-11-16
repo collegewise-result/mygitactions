@@ -2,7 +2,7 @@ name: "Download TestFile"
 
 on:
   schedule:
-    - cron: "*/24 * * * *"
+    - cron: "* */24 * * *"
     
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: suisei-cn/actions-download-file@v1.3.0
         id: downloadfile  # Remember to give an ID if you need the output filename
-        name: Download the file
+        name: Download-the-file
         with:
-          url: "https://cdn.jsdelivr.net/npm/workbox-sw@5.1.3/build/workbox-sw.min.js"
-          target: public/
+          url: "https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf"
+          target: path/to/artifact
           
   download-file:
     name: Download File
@@ -29,6 +29,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: downloadfile
-          -name: test download
-          run: ls R
+          path: path/to/artifact
+      - name: test download
+        run: ls R
+        working-directory: path/to/artifact
     
