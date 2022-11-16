@@ -1,0 +1,9 @@
+name: "Download TestFile"
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  - name: Download a file
+  run: curl https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -o /rates/
