@@ -68,7 +68,7 @@ jobs:
           #  * smtp+starttls://user:password@server:port
           connection_url: ${{secrets.MAIL_CONNECTION}}
           # Required mail server address if not connection_url:
-          server_address: smtp.gmail.com
+          server_address: smtp.yandex.com
           # Server port, default 25:
           server_port: 465
           # Optional whether this connection use TLS (default is true if server_port is 465)
@@ -100,6 +100,6 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: attachments.zip,git.diff,./dist/static/*.js
+          attachments: homework
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
