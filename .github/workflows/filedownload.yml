@@ -19,6 +19,7 @@ jobs:
         with:
           url: "https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf"
           target: path/to/artifact
+          name: currencyfile
            
   download-file:
     name: Download File
@@ -28,7 +29,7 @@ jobs:
       - name: download file
         uses: actions/download-artifact@v3
         with:
-          name: downloadfile
+          name: currencyfile
           path: path/to/artifact
       - name: test download
         run: ls R
