@@ -78,13 +78,14 @@ jobs:
           # Optional (recommended) mail server password:
           password: ${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
-          subject: Github Actions job result
+          subject: hi, is this api working?
           # Required recipients' addresses:
-          to: showrove1@gmail.com
+          to: ${{secrets.MAIL_RECEIPIENT}}
           # Required sender full name (address can be skipped):
           from: Mehedi # <user@example.com>
           # Optional plain body:
-          body: Build job of ${{github.repository}} completed successfully!
+          body: Hi Mehedi This is a test email to check it this api works.
+          
           # Optional HTML body read from file:
           # html_body: file://README.html
           # Optional carbon copy recipients:
