@@ -5,5 +5,15 @@ on:
     - cron: "*/5 * * * *"
 
 jobs:
-  - name: Download a file
-  run: curl https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -o /rates/
+  saveFile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: suisei-cn/actions-download-file@v1.3.0
+        id: downloadfile  # Remember to give an ID if you need the output filename
+        name: Download the file
+        with:
+          url: "https://cdn.jsdelivr.net/npm/workbox-sw@5.1.3/build/workbox-sw.min.js"
+          target: public/
+      
+      
+  
