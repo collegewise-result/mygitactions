@@ -16,6 +16,9 @@ jobs:
     name: Download Currency Details
     runs-on: ubuntu-latest
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - shell: bash
         run: |
           wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency.pdf
@@ -23,8 +26,8 @@ jobs:
       - name: Upload CurrencyDetails as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: currencyDetails
-          path: currency.pdf
+          name: currencyDetails-${{ steps.date.outputs.date }}
+          path: currency-${{ steps.date.outputs.date }}.pdf
   email:
     # This workflow contains a single job called "build"
     
@@ -34,11 +37,11 @@ jobs:
 
       # Steps represent a sequence of tasks that will be executed as part of the job
       steps:
-       - name: Download math result for job 1
-         uses: actions/download-artifact@v3
-         with:
-          name: currencyDetails
-          path: currency.pdf
+    #   - name: Download math result for job 1
+    #     uses: actions/download-artifact@v3
+    #     with:
+    #      name: currencyDetails-${{ steps.date.outputs.date }}
+    #      path: currencyDetails-${{ steps.date.outputs.date }}
           
        - name: Send mail
          uses: dawidd6/action-send-mail@v3
@@ -68,7 +71,7 @@ jobs:
           # Required sender full name (address can be skipped):
           from: Mehedi # <user@example.com>
           # Optional plain body:
-          body: Hi Mr, how are you. did you visit yesterday.
+          body: Dollar Rate of currencyDetails-${{ steps.date.outputs.date }} has been saved.
           
           # Optional HTML body read from file:
           # html_body: file://README.html
@@ -85,6 +88,6 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: ./home/runner/work/mygitactions/mygitactions/*.pdf
+          # attachments: ./home/runner/work/mygitactions/mygitactions/*.pdf
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
