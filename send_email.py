@@ -5,15 +5,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
-import requests
+import urllib.request 
 
-file_url = "https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf"
+url = "https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf"
+urllib.request.urlretrieve(url, "CurrencyDetail.pdf")
 
-
-file_data = requests.get(file_url).content
-# create the file in write binary mode, because the data we get from net is in binary
-with open("CurrencyDetail.pdf", "wb") as file:
-    file.write(file_data)
 
 port = 465
 smtp_server = "smtp.yandex.com"
