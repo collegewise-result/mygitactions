@@ -12,13 +12,14 @@ on:
 
 jobs:
     
-  dlFile:
+  DownloadFile:
     name: Download Currency Details
     runs-on: ubuntu-latest
     steps:
       - shell: bash
         run: |
           wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency.pdf
+          $mail --version
       - name: Upload CurrencyDetails as artifact
         uses: actions/upload-artifact@v3
         with:
@@ -29,7 +30,7 @@ jobs:
     
       # The type of runner that the job will run on
       runs-on: ubuntu-latest
-      needs: dlFile
+      needs: DownloadFile
 
       # Steps represent a sequence of tasks that will be executed as part of the job
       steps:
@@ -37,6 +38,7 @@ jobs:
          uses: actions/download-artifact@v3
          with:
           name: currencyDetails
+          path: currency.pdf
           
        - name: Send mail
          uses: dawidd6/action-send-mail@v3
@@ -83,6 +85,6 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: currencyDetails
+          attachments: currency.pdf
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
