@@ -5,8 +5,15 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+import requests
+
+file_url = "https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf"
 
 
+file_data = requests.get(file_url).content
+# create the file in write binary mode, because the data we get from net is in binary
+with open("CurrencyDetail.pdf", "wb") as file:
+    file.write(file_data)
 
 port = 465
 smtp_server = "smtp.yandex.com"
@@ -37,7 +44,7 @@ This is your daily email report.
 """
 msg.attach(MIMEText(body, 'plain'))
 
-filename = "currency.pdf"
+filename = "CurrencyDetail.pdf"
 attachment = open(filename, 'rb')
 
 part = MIMEBase('application', 'octet-stream')
