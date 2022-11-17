@@ -10,7 +10,7 @@ import urllib.request
 url = "https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf"
 urllib.request.urlretrieve(url, "CurrencyDetail.pdf")
 
-
+'''
 port = 465
 smtp_server = "smtp.yandex.com"
 USERNAME = os.environ.get('USER_EMAIL')
@@ -59,7 +59,7 @@ server.sendmail(email_user, email_rcver, text)
 server.quit()
 
 print("Sent!")
-
+'''
 
 
 
