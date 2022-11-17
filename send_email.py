@@ -7,54 +7,54 @@ from email import encoders
 
 
 
-    port = 465
-    smtp_server = "smtp.yandex.com"
-    USERNAME = os.environ.get('USER_EMAIL')
-    PASSWORD = os.environ.get('USER_PASSWORD')
-    RECEIPIENT = os.environ.get('USER_RECEIPIENT')
-    message = """\
-    Subject: GitHub Email Report
+port = 465
+smtp_server = "smtp.yandex.com"
+USERNAME = os.environ.get('USER_EMAIL')
+PASSWORD = os.environ.get('USER_PASSWORD')
+RECEIPIENT = os.environ.get('USER_RECEIPIENT')
+message = """\
+Subject: GitHub Email Report
 
-    This is your daily email report.
-    """
-    
-    email_user = USERNAME
-    email_password = PASSWORD
-    email_rcver = RECEIPIENT
+This is your daily email report.
+"""
 
-    subject = "currency details as on ", datetime.now().strftime("%m/%d/%Y")
+email_user = USERNAME
+email_password = PASSWORD
+email_rcver = RECEIPIENT
 
-    msg = MIMEMultipart()
-    msg['From'] = email_user
-    msg['To'] = email_rcver
-    msg['Subject'] = subject
+subject = "currency details as on ", datetime.now().strftime("%m/%d/%Y")
 
-    body = """\
-    Subject: GitHub Email Report
+msg = MIMEMultipart()
+msg['From'] = email_user
+msg['To'] = email_rcver
+msg['Subject'] = subject
 
-    This is your daily email report.
-    """
-    msg.attach(MIMEText(body, 'plain'))
+body = """\
+Subject: GitHub Email Report
 
-    filename = "currency.pdf"
-    attachment = open(filename, 'rb')
+This is your daily email report.
+"""
+msg.attach(MIMEText(body, 'plain'))
 
-    part = MIMEBase('application', 'octet-stream')
-    part.set_payload(attachment.read())
-    encoders.encode_base64(part)
-    part.add_header('content-disposition', "attachment; filename= "+filename)
+filename = "currency.pdf"
+attachment = open(filename, 'rb')
 
-    msg.attach(part)
-    text = msg.as_string()
+part = MIMEBase('application', 'octet-stream')
+part.set_payload(attachment.read())
+encoders.encode_base64(part)
+part.add_header('content-disposition', "attachment; filename= "+filename)
 
-    server = smtplib.SMTP(smtp_server, port)
-    server.starttls()
-    server.login(email_user, email_password)
+msg.attach(part)
+text = msg.as_string()
 
-    server.sendmail(email_user, email_rcver, text)
-    server.quit()
+server = smtplib.SMTP(smtp_server, port)
+server.starttls()
+server.login(email_user, email_password)
 
-    print("Sent!")
+server.sendmail(email_user, email_rcver, text)
+server.quit()
+
+print("Sent!")
 
 
 
