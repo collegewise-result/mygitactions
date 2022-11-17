@@ -19,7 +19,7 @@ jobs:
       - shell: bash
         run: |
           wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency.pdf
-          $mail --version
+          
       - name: Upload CurrencyDetails as artifact
         uses: actions/upload-artifact@v3
         with:
