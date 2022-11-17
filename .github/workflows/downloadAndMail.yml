@@ -21,7 +21,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - shell: bash
         run: |
-          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency.pdf
+          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency-${{ steps.date.outputs.date }}.pdf
           
       - name: Upload CurrencyDetails as artifact
         uses: actions/upload-artifact@v3
