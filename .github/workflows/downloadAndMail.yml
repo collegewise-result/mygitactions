@@ -33,9 +33,14 @@ jobs:
 
       # Steps represent a sequence of tasks that will be executed as part of the job
       steps:
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
-        with:
+       - name: Download math result for job 1
+         uses: actions/download-artifact@v3
+         with:
+          name: currencyDetails
+          
+       - name: Send mail
+         uses: dawidd6/action-send-mail@v3
+         with:
           # Specify connection via URL (replaces server_address, server_port, secure,
           # username and password)
           #
@@ -78,6 +83,6 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: currency.pdf
+          attachments: currencyDetails
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
