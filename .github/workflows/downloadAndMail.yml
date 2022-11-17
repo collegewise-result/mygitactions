@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "::set-output name=date::$(date +'%d-%m-%Y')"
       - shell: bash
         run: |
           wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency-${{ steps.date.outputs.date }}.pdf
