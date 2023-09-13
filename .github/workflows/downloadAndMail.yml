@@ -24,13 +24,13 @@ jobs:
       
       - shell: bash
         run: |
-          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency-${{ env.TIME }}.pdf
+          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency-${{ steps.date.outputs.TIME }}.pdf
           
       - name: Upload CurrencyDetails as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: currencyDetails-${{ env.TIME }}
-          path: currency-${{ env.TIME }}.pdf
+          name: currencyDetails-${{ steps.date.outputs.TIME }}
+          path: currency-${{ steps.date.outputs.TIME }}.pdf
  
     #   - name: Download math result for job 1
     #     uses: actions/download-artifact@v3
@@ -60,13 +60,13 @@ jobs:
           # Optional (recommended) mail server password:
           password: ${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
-          subject: Currency Details-${{ env.TIME }}
+          subject: Currency Details-${{ steps.date.outputs.TIME }}
           # Required recipients' addresses:
           to: ${{secrets.MAIL_RECEIPIENT}}
           # Required sender full name (address can be skipped):
           from: Mehedi Hasan # <user@example.com>
           # Optional plain body:
-          body: Dollar Rate of ${{ env.TIME }} has been saved.
+          body: Dollar Rate of ${{ steps.date.outputs.TIME }} has been saved.
           
           # Optional HTML body read from file:
           # html_body: file://README.html
