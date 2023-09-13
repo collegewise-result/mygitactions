@@ -60,13 +60,13 @@ jobs:
           # Optional (recommended) mail server password:
           password: ${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
-          subject: Currency Exchange Rate on-${{ steps.date.outputs.TIME }}
+          subject: RBL Currency Exchange Rate.
           # Required recipients' addresses:
           to: ${{secrets.MAIL_RECEIPIENT}}
           # Required sender full name (address can be skipped):
           from: Mehedi Hasan # <user@example.com>
           # Optional plain body:
-          body: Dollar Rate of ${{ steps.date.outputs.TIME }} has been saved.
+          body: Dollar Rate on ${{ steps.date.outputs.TIME }}.
           
           # Optional HTML body read from file:
           # html_body: file://README.html
