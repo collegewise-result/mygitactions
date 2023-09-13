@@ -64,7 +64,7 @@ jobs:
           # Required recipients' addresses:
           to: ${{secrets.MAIL_RECEIPIENT}}
           # Required sender full name (address can be skipped):
-          from: Mehedi # <user@example.com>
+          from: Mehedi Hasan # <user@example.com>
           # Optional plain body:
           body: Dollar Rate of ${{ env.TIME }} has been saved.
           
@@ -75,7 +75,7 @@ jobs:
           # Optional blind carbon copy recipients:
           # bcc: r2d2@example.com,hansolo@example.com
           # Optional recipient of the email response:
-          # reply_to: luke@example.com
+          reply_to: ${{secrets.MAIL_USERNAME}}
           # Optional Message ID this message is replying to:
           # in_reply_to: <random-luke@example.com>
           # Optional unsigned/invalid certificates allowance:
