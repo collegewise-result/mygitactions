@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: currencyDetails-${{ steps.date.outputs.TIME }}
-          path: currency-${{ steps.date.outputs.TIME }}.pdf
+          path: Currency-Details-${{ steps.date.outputs.TIME }}.pdf
  
     #   - name: Download math result for job 1
     #     uses: actions/download-artifact@v3
@@ -60,7 +60,7 @@ jobs:
           # Optional (recommended) mail server password:
           password: ${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
-          subject: Currency Details-${{ steps.date.outputs.TIME }}
+          subject: Currency Exchange Rate on-${{ steps.date.outputs.TIME }}
           # Required recipients' addresses:
           to: ${{secrets.MAIL_RECEIPIENT}}
           # Required sender full name (address can be skipped):
@@ -73,7 +73,7 @@ jobs:
           # Optional carbon copy recipients:
           # cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients:
-          # bcc: r2d2@example.com,hansolo@example.com
+          bcc: ${{secrets.BCC}}
           # Optional recipient of the email response:
           reply_to: ${{secrets.MAIL_USERNAME}}
           # Optional Message ID this message is replying to:
@@ -83,6 +83,6 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: currency-${{ steps.date.outputs.TIME }}.pdf
+          attachments: Currency-Details-${{ steps.date.outputs.TIME }}.pdf
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
