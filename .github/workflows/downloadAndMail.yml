@@ -24,7 +24,7 @@ jobs:
       
       - shell: bash
         run: |
-          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O currency-${{ steps.date.outputs.TIME }}.pdf
+          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O Currency-Details-${{ steps.date.outputs.TIME }}.pdf
           
       - name: Upload CurrencyDetails as artifact
         uses: actions/upload-artifact@v3
