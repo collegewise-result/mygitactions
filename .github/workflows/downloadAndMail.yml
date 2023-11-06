@@ -1,4 +1,4 @@
-#updated on 16/07/2023
+#updated on 06/11/2023
 name: "Download File and Send Email"
 
 on:
@@ -32,11 +32,6 @@ jobs:
           name: currencyDetails-${{ steps.date.outputs.TIME }}
           path: Currency-Details-${{ steps.date.outputs.TIME }}.pdf
  
-    #   - name: Download math result for job 1
-    #     uses: actions/download-artifact@v3
-    #     with:
-    #      name: currencyDetails-${{ steps.date.outputs.date }}
-    #      path: currencyDetails-${{ steps.date.outputs.date }}
           
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
