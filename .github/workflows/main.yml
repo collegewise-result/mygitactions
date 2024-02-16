@@ -1,0 +1,83 @@
+#updated on 15/02/2024
+name: "Download File and Send Email"
+
+on:
+  schedule:
+    - cron: "30 7 * * 0-4"
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+    
+   
+
+jobs:
+    
+  DownloadFile:
+    name: Download Currency Details
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        #run: echo "::set-output name=date::$(date +'%d-%m-%Y')"
+        run: echo "TIME=$(date +'%d-%m-%Y')" >> $GITHUB_OUTPUT
+      
+      - shell: bash
+        run: |
+          wget https://rupalibank.com.bd/admin_web/files/currency/CurrencyDetail.pdf -O Currency-Details-${{ steps.date.outputs.TIME }}.pdf
+          
+      - name: Upload CurrencyDetails as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: currencyDetails-${{ steps.date.outputs.TIME }}
+          path: Currency-Details-${{ steps.date.outputs.TIME }}.pdf
+ 
+          
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Specify connection via URL (replaces server_address, server_port, secure,
+          # username and password)
+          #
+          # Format:
+          #
+          #  * smtp://user:password@server:port
+          #  * smtp+starttls://user:password@server:port
+          # connection_url: ${{secrets.MAIL_CONNECTION}}
+          # Required mail server address if not connection_url:
+          server_address: smtp.yandex.com
+          # Server port, default 25:
+          server_port: 465
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional (recommended): mail server username:
+          username: ${{secrets.MAIL_USERNAME}}
+          # Optional (recommended) mail server password:
+          password: ${{secrets.MAIL_PASSWORD}}
+          # Required mail subject:
+          subject: RBL Currency Exchange Rate.
+          # Required recipients' addresses:
+          to: ${{secrets.MAIL_RECEIPIENT}}
+          # Required sender full name (address can be skipped):
+          from: Mehedi Hasan # <user@example.com>
+          # Optional plain body:
+          body: Dollar Rate on ${{ steps.date.outputs.TIME }}.
+          
+          # Optional HTML body read from file:
+          # html_body: file://README.html
+          # Optional carbon copy recipients:
+          # cc: kyloren@example.com,leia@example.com
+          # Optional blind carbon copy recipients:
+          bcc: ${{secrets.BCC}}
+          # Optional recipient of the email response:
+          reply_to: ${{secrets.MAIL_USERNAME}}
+          # Optional Message ID this message is replying to:
+          # in_reply_to: <random-luke@example.com>
+          # Optional unsigned/invalid certificates allowance:
+          ignore_cert: true
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          convert_markdown: true
+          # Optional attachments:
+          attachments: Currency-Details-${{ steps.date.outputs.TIME }}.pdf
+          # Optional priority: 'high', 'normal' (default) or 'low'
+          priority: low
